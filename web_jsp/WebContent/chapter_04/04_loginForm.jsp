@@ -14,5 +14,12 @@
 		<input type="password" name="pwd" id="userpwd"><br>
 		<input type="submit" value="로그인">
 	</form>
+	
+	<%
+		String error = (String)request.getAttribute("error");
+		if (error != null) {
+			out.write("<div class='error'>" + error + "</div>");
+		}
+	%>
 </body>
 </html>

@@ -1,8 +1,10 @@
-package chapter_04;
+package servlet;
 
+import java.io.File;
 import java.io.IOException;
-import java.net.URLEncoder;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,11 +12,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class ViewImageServlet
  */
-@WebServlet("/chapter_04/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet(urlPatterns = {"/view_images"})
+public class ViewImageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ViewImageServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -22,7 +32,15 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		ServletContext application = request.getServletContext();
+		String filePath = application.getRealPath("/images");
+		File dir = new File(filePath);
+		String[] files = dir.list();
 		
+		request.setAttribute("files", files);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/chapter_04/ex1.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**
@@ -30,16 +48,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
-		String id = "skw1105";
-		String pwd = "1234";
-		String name = "심규원";
-		request.setCharacterEncoding("UTF-8");
-		if (id.equals(request.getParameter("id")) && pwd.equals(request.getParameter("pwd"))) {
-			response.sendRedirect("04_main.jsp?name=" + URLEncoder.encode(name, "UTF-8"));
-		} else {
-			response.sendRedirect("04_loginForm.jsp");
-		}
+		doGet(request, response);
 	}
 
 }
