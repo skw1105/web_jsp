@@ -24,7 +24,7 @@ public class LoginServlet extends HttpServlet {
 		System.out.println("\n\n== LoginServlet doGet() 진입 ==\n\n");
 		
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		RequestDispatcher dispatcher = request.getRequestDispatcher("10_loginForm.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("10_loginForm.jsp");// /chapter05/10_loginForm.jsp
 		// 이 경로는 서버가 해석하는 경로임. 서버는 루트(context path)가 어딘지 알고 있으므로 그 이후의 경로만 써주면 된다.
 		dispatcher.forward(request, response);
 	}
@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
 			
 			if (target.isEmpty()) {
 				System.out.println("\n\n=========== target.isEmpty() true ===========\\n\\n");
-				response.sendRedirect("10_main.jsp"); //실패하면 원래 페이지로 가는듯
+				response.sendRedirect("/10_main.jsp"); //실패하면 원래 페이지로 가는듯
 			} else {
 				System.out.println("\n\n=========== target.isEmpty() false ===========\\n\\n");
 				response.sendRedirect(target);

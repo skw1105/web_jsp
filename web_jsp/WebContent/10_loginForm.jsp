@@ -37,10 +37,10 @@
 </head>
 <body>
 	<form method="post" action="login">
-		<input type="hidden" name="target" value="<%=target%>">
+		<input type="hidden" name="target" value="${target}">
 		
 		<label for="userid"> 아이디 : </label>
-		<input type="text" name="id" id="userid"><br>
+		<input type="text" name="id" id="userid" value=${param.id}><br>
 		
 		<label for="userpwd"> 암 &nbsp; 호 : </label>
 		<input type="password" name="pwd" id="userpwd"><br>
@@ -52,8 +52,11 @@
 		<a href="join">회원가입</a>
 	</div>
 
-	<div class="error"><%=error%></div>
-	<div class="reason"><%=reason%></div>
+	<div class="error">${error}</div>
+	<div class="reason">${reason}</div>
 
+	전에 입력한 값 <br>
+	ID: ${param.id}, ${param["id"]}<br>
+	PW: ${param.pwd}, ${param["pwd"]}<br>
 </body>
 </html>

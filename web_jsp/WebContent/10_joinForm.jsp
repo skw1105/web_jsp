@@ -7,12 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form method="post">
-		사용자 ID: <input type="text" name="userId" required><br>
+	<form method="post" action="">
+		사용자 ID: <input type="text" name="userId" value="${member.userId}" required><br>
 		비밀번호: <input type="password" name="password" required><br>
-		이름: <input type="text" name="name" required><br>
-		이메일: <input type="text" name="email" required><br>
-		전화번호: <input type="text" name="phone" required><br>
+		이름: <input type="text" name="name" value="${member.name}" required><br>
+		이메일: <input type="text" name="email" value="${member.email}" required><br>
+		전화번호: <input type="text" name="phone" value="${member.phone}" required><br>
 		성별:
 		<label>
 			<input type="radio" name="gender" value="M">남

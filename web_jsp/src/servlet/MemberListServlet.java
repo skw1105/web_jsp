@@ -10,20 +10,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import domain.Member;
+import domain.PageInfo;
+import service.MemberService;
+import service.MemberServiceImpl;
+import util.ParseUtil;
 
 /**
- * Servlet implementation class JoinServlet
+ * Servlet implementation class MemberListServlet
  */
-@WebServlet("/join")
-public class JoinServlet extends HttpServlet {
+@WebServlet("/member/list")
+public class MemberListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	MemberService service;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public JoinServlet() {
+    public MemberListServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        service = MemberServiceImpl.getInstance();
     }
 
 	/**
@@ -33,7 +38,24 @@ public class JoinServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("10_joinForm.jsp");
+//		int page = 1;
+//		String strPage = request.getParameter("page");
+//		if (strPage != null) {
+//			Integer.parseInt(strPage);
+//		}
+		
+//		String strPage = request.getParameter("page");
+//		int page = (strPage == null) ? 1 : Integer.parseInt(strPage);
+//		System.out.println("page: " + page);
+		
+		int page = ParseUtil.parseInt(request.getParameter("page"));
+		
+		PageInfo<Member> pageInfo = service.getPage(page);
+		
+		request.setAttribute("pageInfo", pageInfo);
+		//request.setAttribute("memberList", pageInfo.getList());
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/member/list.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -41,33 +63,8 @@ public class JoinServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Member member = map(request);
-		System.out.println(member);
-		
-		// 회원 가입을 위한 유효성 검사, 실패로 가정
-		request.setAttribute("member", member);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("10_joinForm.jsp");
-		dispatcher.forward(request, response);
-	}
-	
-	private Member map(HttpServletRequest request) {
-		
-		Member member = new Member();
-		member.setUserId(request.getParameter("userId"));
-		member.setPassword(request.getParameter("password"));
-		member.setName(request.getParameter("name"));
-		member.setEmail(request.getParameter("email"));
-		member.setPhone(request.getParameter("phone"));
-		member.setGender(request.getParameter("gender"));
-		
-		return member;
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }
-
-
-
-
-
-
-
