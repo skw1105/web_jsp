@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
@@ -9,16 +9,27 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<c:set var="context" value="${pageContext.request.contextPath}" />
+	${context}/images/Desert.jpg
+
+
 	<h1>첫 페이지 입니다.</h1>
-	
+
 	<c:choose>
 		<c:when test="${not empty id}">
 			${id}(${name}) | <a href="logout">로그아웃</a>
 		</c:when>
 		<c:otherwise>
-			<a href="login">로그인</a>
-			<a href="join">회원가입</a>
+			<a href="login">로그인</a> | <a href="join">회원가입</a>
 		</c:otherwise>
 	</c:choose>
+
+	<c:forEach var="movie" items="${movieList}" varStatus="status">
+		<tr>
+			<td>${status.index}</td>
+			<td>${status.count}</td>
+			<td>${movie}</td>
+		</tr>
+	</c:forEach>
 </body>
 </html>

@@ -52,7 +52,7 @@ public class LoginFilter implements Filter {
 		
 		if (id != null) { // 로그인 한 경우
 			System.out.println("LoginFilter 로그인 창에서 한 경우");
-			//chain.doFilter(request, response);
+			chain.doFilter(request, response);
 		} else { // 로그인 하지 않은 경우
 			HttpServletResponse res = (HttpServletResponse)response;
 			String appPath = req.getContextPath();
